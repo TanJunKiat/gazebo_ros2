@@ -107,6 +107,42 @@ if(ENABLE_PROFILER)
   target_include_directories(gazebo_ros_force PUBLIC ${ignition-common3_INCLUDE_DIRS})
   target_link_libraries(gazebo_ros_force ${ignition-common3_LIBRARIES})
 endif()
+
+
+# gazebo_ros_joint
+add_library(gazebo_ros_joint SHARED
+  src/gazebo_ros_joint.cpp
+)
+target_include_directories(gazebo_ros_joint PUBLIC include)
+ament_target_dependencies(gazebo_ros_joint
+  "gazebo_dev"
+  "gazebo_ros"
+  "geometry_msgs"
+  "rclcpp"
+)
+ament_export_libraries(gazebo_ros_joint)
+if(ENABLE_PROFILER)
+  target_include_directories(gazebo_ros_joint PUBLIC ${ignition-common3_INCLUDE_DIRS})
+  target_link_libraries(gazebo_ros_joint ${ignition-common3_LIBRARIES})
+endif()
+
+# gazebo_ros_dynamixel
+add_library(gazebo_ros_dynamixel SHARED
+  src/gazebo_ros_dynamixel.cpp
+)
+target_include_directories(gazebo_ros_dynamixel PUBLIC include)
+ament_target_dependencies(gazebo_ros_dynamixel
+  "gazebo_dev"
+  "gazebo_ros"
+  "geometry_msgs"
+  "rclcpp"
+)
+ament_export_libraries(gazebo_ros_dynamixel)
+if(ENABLE_PROFILER)
+  target_include_directories(gazebo_ros_dynamixel PUBLIC ${ignition-common3_INCLUDE_DIRS})
+  target_link_libraries(gazebo_ros_dynamixel ${ignition-common3_LIBRARIES})
+endif()
+
 # gazebo_ros_template
 add_library(gazebo_ros_template SHARED
   src/gazebo_ros_template.cpp
@@ -520,6 +556,8 @@ install(TARGETS
     gazebo_ros_vacuum_gripper
     gazebo_ros_video
     multi_camera_plugin
+    gazebo_ros_joint
+    gazebo_ros_dynamixel
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
   RUNTIME DESTINATION bin)
